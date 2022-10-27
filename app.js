@@ -1,24 +1,37 @@
 
 const express = require('express');
-const bodyParcer = require('body-parser');
+const bodyParser=require('body-parser');
 const cors = require('cors');
 
 let app=express();
 app.use(cors());
-app.urlencodeParcer=bodyParcer.urlencoded({extended:false});
+let urlencodedParser=bodyParser.urlencoded({extended:false});
+
+
+let dados={
+    "nome":'Junior Pereira',
+    "cidade":'Belo Horizonte',
+    "idade":34,
+    "estado":'Minas Gerais',
+    "profisao":'Programador'
+}
+
 
 app.get('/',function(req,res){
-    let dados={
-        "nome":'Junior Pereira',
-        "cidade":'Belo Horizonte',
-        "idade":34,
-        "estado":'Minas Gerais',
-        "profisao":'Programador'
-    }
+
  //res.send("Hello Word !")
 res.send(dados);
 
 });
+
+app.post('/',urlencodedParser,function(req,res){
+    let obj={
+        name: req.body.name, // name é o valor do Postado 
+        age: 26
+    };
+    res.json(obj); //Retorna o json
+});
+
 
 let port= 3000 || process.env.PORT;
 app.listen(port);
