@@ -26,7 +26,7 @@ res.send(dados);
 
 app.post('/',urlencodedParser,function(req,res){
     let obj={
-        name: req.body.name, // name é o valor do Postado 
+        name: req.body.name, 
         age: 26
     };
     res.json(obj); //Retorna o json
